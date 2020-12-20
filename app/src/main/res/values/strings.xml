@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">MusicPlayerTask</string>
+    <string name="mediaListFragment">רשימת השמעה</string>
+    <string name="desc_media_image">תמונת המחשב לשיר</string>
+    <string name="add_audio_item">הוסף פריט שמע</string>
+    <string name="audio_name">שם פריט השמע</string>
+    <string name="audio_url">קישור</string>
+    <string name="desc_btn_drag">כפתור גרירה</string>
+</resources>

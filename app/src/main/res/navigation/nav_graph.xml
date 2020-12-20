@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/mediaListFragment">
+
+    <fragment
+        android:id="@+id/mediaListFragment"
+        android:name="com.itaycohen.musicplayertask.ui.MediaListFragment"
+        android:label="@string/mediaListFragment"
+        tools:layout="@layout/fragment_media_list">
+    </fragment>
+
+    <fragment
+        android:id="@+id/bottomAddAudioDialogFragment"
+        android:name="com.itaycohen.musicplayertask.ui.BottomAddAudioDialogFragment"
+        android:label=""
+        tools:layout="@layout/fragment_add_audio_item"/>
+</navigation>
