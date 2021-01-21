@@ -8,7 +8,6 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
-import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -23,6 +22,7 @@ class MediaListFragment : Fragment() {
     private var _binding: FragmentMediaListBinding? = null
     private val audioViewModel: AudioViewModel by navGraphViewModels(R.id.nav_graph) {
         AudioViewModel.Factory(
+            requireContext().applicationContext,
             MediaItemsRepository.getInstance(
                 requireContext().applicationContext,
                 LocalDatabase.getInstance(requireContext().applicationContext).audioDao()
@@ -48,7 +48,7 @@ class MediaListFragment : Fragment() {
         initTopAppBar()
         with(binding.mediaRecyclerView) {
             layoutManager = LinearLayoutManager(context)
-            val itemTouchHelper = ItemTouchHelper(TabsItemTouchHelperCallback(audioViewModel.itemTouchHelperCallback))
+            val itemTouchHelper = ItemTouchHelper(TracksItemTouchHelperCallback(audioViewModel.itemTouchHelperCallback))
             itemTouchHelper.attachToRecyclerView(this)
             addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL).apply {
                 setDrawable(ContextCompat.getDrawable(context, R.drawable.media_items_divider)!!)
@@ -63,6 +63,7 @@ class MediaListFragment : Fragment() {
                 BottomAddAudioDialogFragment::class.simpleName
             )
         }
+        binding.playFab.setOnClickListener(audioViewModel::onPlayClick)
     }
 
     private fun initTopAppBar() {

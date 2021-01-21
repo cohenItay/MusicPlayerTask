@@ -26,8 +26,8 @@ interface AudioDao {
     fun insertAll(vararg audioItems: AudioItem)
 
     @Delete
-    fun delete(audioItem: AudioItem)
+    fun delete(audioItem: AudioItem): Int
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertOrReplaceIndicesFor(vararg audioItemsIndices: AudioItemIndex) : List<Long>
+    fun insertOrReplaceIndicesFor(audioItemsIndices: List<AudioItemIndex>) : List<Long>
 }

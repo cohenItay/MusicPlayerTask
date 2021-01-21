@@ -1,33 +1,37 @@
 package com.itaycohen.musicplayertask.data.models
 
+import android.os.Parcelable
 import androidx.annotation.DrawableRes
 import androidx.room.TypeConverter
+import kotlinx.android.parcel.Parcelize
 
-sealed class ItemImageInfo {
+sealed class ItemImageInfo : Parcelable {
 
+    @Parcelize
     data class Local(
         @DrawableRes val drawableRes: Int
-    ) : ItemImageInfo()
+    ) : ItemImageInfo(), Parcelable
 
+    @Parcelize
     data class Remote(
         val imageUrl: String
-    ) : ItemImageInfo()
+    ) : ItemImageInfo(), Parcelable
 
     // Room util:
     class Converters {
         @TypeConverter
         fun fromAudioImageInfo(value: ItemImageInfo): String {
             return when (value) {
-                is ItemImageInfo.Local -> value.drawableRes.toString()
-                is ItemImageInfo.Remote -> value.imageUrl
+                is Local -> value.drawableRes.toString()
+                is Remote -> value.imageUrl
             }
         }
 
         @TypeConverter
         fun toAudioImageInfo(value: String): ItemImageInfo {
             return value.toIntOrNull()?.let { drawableRes ->
-                ItemImageInfo.Local(drawableRes)
-            } ?: ItemImageInfo.Remote(value)
+                Local(drawableRes)
+            } ?: Remote(value)
         }
     }
 }

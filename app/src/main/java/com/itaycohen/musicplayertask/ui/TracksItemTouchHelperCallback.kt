@@ -2,13 +2,12 @@ package com.itaycohen.musicplayertask.ui
 
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
-import com.itaycohen.musicplayertask.R
 
 
 /**
  *  Helper class to drag items up or down
  */
-class TabsItemTouchHelperCallback(
+class TracksItemTouchHelperCallback(
     private val callBacks: Callbacks
 ) : ItemTouchHelper.Callback() {
 
@@ -16,14 +15,17 @@ class TabsItemTouchHelperCallback(
     override fun getMovementFlags(
         recyclerView: RecyclerView,
         viewHolder: RecyclerView.ViewHolder
-    ): Int = makeMovementFlags(ItemTouchHelper.UP or ItemTouchHelper.DOWN, 0)
+    ): Int = makeMovementFlags(ItemTouchHelper.UP or ItemTouchHelper.DOWN, ItemTouchHelper.START)
 
     override fun onSelectedChanged(viewHolder: RecyclerView.ViewHolder?, actionState: Int) {
         if (viewHolder is MovableViewHolder) {
-            val ctx = viewHolder.itemView.context
+
             when (actionState) {
                 ItemTouchHelper.ACTION_STATE_DRAG -> {
-                    // viewHolder.itemView.setBackgroundColor(R.color.gray200)
+                    callBacks.onItemDragStart()
+                }
+                ItemTouchHelper.ACTION_STATE_SWIPE -> {
+
                 }
             }
         }
@@ -45,12 +47,18 @@ class TabsItemTouchHelperCallback(
 
     override fun clearView(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder) {
         super.clearView(recyclerView, viewHolder)
-        callBacks.onArrangementDoneForItem()
+        callBacks.onItemDragEnd()
     }
 
-    override fun onSwiped(viewHolder: RecyclerView.ViewHolder, i: Int) {}
+    override fun onSwiped(viewHolder: RecyclerView.ViewHolder, i: Int) {
+        when (i) {
+            ItemTouchHelper.START ->
+                callBacks.onItemSwipToStart(viewHolder.adapterPosition)
+        }
+    }
+
     override fun isLongPressDragEnabled(): Boolean = true
-    override fun isItemViewSwipeEnabled(): Boolean = false
+    override fun isItemViewSwipeEnabled(): Boolean = true
 
     interface Callbacks {
 
@@ -61,6 +69,8 @@ class TabsItemTouchHelperCallback(
          */
         fun changePosition(from: Int, to: Int) : Boolean
 
-        fun onArrangementDoneForItem()
+        fun onItemDragEnd()
+        fun onItemDragStart()
+        fun onItemSwipToStart(adapterPosition: Int)
     }
 }

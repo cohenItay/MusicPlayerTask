@@ -4,7 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingBottom="40dp">
+    android:paddingBottom="40dp"
+    android:paddingTop="40dp">
 
     <TextView
         android:id="@+id/addAudioBtn"
@@ -57,7 +58,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
-        android:hint="@string/audio_url"
+        android:hint="@string/image_preview_url"
         app:endIconMode="clear_text">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/audioImageUrlEditText"

@@ -10,11 +10,18 @@
         android:name="com.itaycohen.musicplayertask.ui.MediaListFragment"
         android:label="@string/mediaListFragment"
         tools:layout="@layout/fragment_media_list">
+        <action
+            android:id="@+id/action_mediaListFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
     </fragment>
 
     <fragment
-        android:id="@+id/bottomAddAudioDialogFragment"
-        android:name="com.itaycohen.musicplayertask.ui.BottomAddAudioDialogFragment"
-        android:label=""
-        tools:layout="@layout/fragment_add_audio_item"/>
+        android:id="@+id/detailFragment"
+        android:name="com.itaycohen.musicplayertask.ui.DetailFragment"
+        android:label="@string/audio_item_details"
+        tools:layout="@layout/fragment_detail">
+        <argument
+            android:name="audioItem"
+            app:argType="com.itaycohen.musicplayertask.data.models.AudioItem" />
+    </fragment>
 </navigation>

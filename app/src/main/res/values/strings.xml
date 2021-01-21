@@ -4,6 +4,16 @@
     <string name="desc_media_image">תמונת המחשב לשיר</string>
     <string name="add_audio_item">הוסף פריט שמע</string>
     <string name="audio_name">שם פריט השמע</string>
-    <string name="audio_url">קישור</string>
+    <string name="audio_url">קישור לקובץ השמע</string>
     <string name="desc_btn_drag">כפתור גרירה</string>
+    <string name="image_preview_url">קישור לתמונת התצוגה</string>
+    <string name="no_content">לא הוזן תוכן</string>
+    <string name="invalid_url">הקישור שהוזן איננו תקין</string>
+    <string name="cant_insert_audio">קיימת בעייה בשמירת פריט השמע</string>
+    <string name="url_might_already_exists">"הקישור לפריט השמע כבר שמור במכשיר"</string>
+    <string name="desc_preview_image">תמונת רקע לפריט השמע</string>
+    <string name="audio_src_label">מקור השמע</string>
+    <string name="audio_item_details">פרטי השמע</string>
+    <string name="desc_play">נגן רשימת השמעה</string>
+    <string name="audio_player_secription">שירות שמנגן את השירים</string>
 </resources>

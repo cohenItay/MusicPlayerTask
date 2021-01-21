@@ -1,5 +1,6 @@
 package com.itaycohen.musicplayertask.ui
 
+import android.annotation.SuppressLint
 import android.view.MotionEvent
 import android.view.View
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -20,10 +21,19 @@ class AudioItemViewHolder(
 
     init {
         v.setOnClickListener { interactionListener.onAudioItemClick(it , adapterPosition) }
+        binding.root.setOnTouchListener { _, event ->
+            when (event.actionMasked) {
+                MotionEvent.ACTION_DOWN -> {
+                    itemTouchHelper.startSwipe(this)
+                }
+            }
+            false
+        }
         binding.dragBtn.setOnTouchListener { _, event ->
             when (event.actionMasked) {
-                MotionEvent.ACTION_DOWN ->
+                MotionEvent.ACTION_DOWN -> {
                     itemTouchHelper.startDrag(this)
+                }
                 MotionEvent.ACTION_UP ->
                     v.performClick()
             }

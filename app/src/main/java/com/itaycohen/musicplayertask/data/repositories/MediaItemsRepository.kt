@@ -19,8 +19,11 @@ class MediaItemsRepository private constructor(
 
     fun fetchAudioItemsLiveData() = audioDao.fetchAudioItemsLiveData()
 
-    suspend fun insertOrReplaceIndicesFor(vararg audioItemsIndices: AudioItemIndex) =
-        audioDao.insertOrReplaceIndicesFor(*audioItemsIndices)
+    fun insertOrReplaceIndicesFor(audioItemsIndices: List<AudioItemIndex>) =
+        audioDao.insertOrReplaceIndicesFor(audioItemsIndices)
+
+    fun deleteAudioItem(audioItem: AudioItem) =
+        audioDao.delete(audioItem)
 
     companion object {
         private lateinit var _instance: MediaItemsRepository
